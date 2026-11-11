@@ -1,0 +1,17 @@
+## 2026-10-23T11:43:34Z clean run (uncommitted tree, no HEAD)
+- `pnpm install --frozen-lockfile` exit=127 
+- `pnpm build` exit=127 
+- `pnpm typecheck` exit=127 
+- `pnpm test` exit=127 
+- lockfile unchanged by frozen install (frozen install would have failed otherwise)
+- dev `docker compose up -d --build --wait` exit=0
+api=Up 11 seconds (healthy) postgres=Up 17 seconds (healthy) redis=Up 17 seconds (healthy) web=Up 5 seconds (healthy) 
+- dev web-origin: / 200; /api/health {"status":"ok"} 200
+- postgres stopped: postgres=Exited (0) 2 seconds ago; /api/health {"status":"ok"} 200
+- redis stopped: redis=Exited (0) 2 seconds ago; /api/health {"status":"ok"} 200
+- prod up exit=1
+open /Users/artemkrasovskyi/Workspace/Atmos/ compose.yaml -f compose.prod.yaml: no such file or directory
+
+- prod nginx: / 000; /api/health  000; /some/client/route 000
+open /Users/artemkrasovskyi/Workspace/Atmos/ compose.yaml -f compose.prod.yaml: no such file or directory
+- browser assets: no backend values

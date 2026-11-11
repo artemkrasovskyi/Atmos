@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.turbo
+.git
+.idea
+.claude
+.codex
+openspec
+docs
+apps/api/.env
+.env.*
+!.env.example

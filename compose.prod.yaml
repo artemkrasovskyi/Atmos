@@ -1,0 +1,17 @@
+# Override: run the production images (Nginx web on :8080, compiled API).
+services:
+  api:
+    build:
+      target: prod
+    volumes: !reset []
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+  web:
+    build:
+      target: prod
+    environment: !reset {}
+    ports: !override
+      - "8080:80"
+    volumes: !reset []
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/api/health"]

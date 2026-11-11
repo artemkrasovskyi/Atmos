@@ -1,0 +1,15 @@
+schema: spec-driven
+
+context: |
+  Project: Atmos Weather Analytics Platform.
+
+  Source of truth:
+  - docs/product.md
+  - docs/architecture.md
+  - docs/decisions.md
+  - docs/development-workflow.md
+  - docs/design-reference.md
+
+  Frontend and Backend specifications must be separate.
+  Some Backend tasks are reserved for manual implementation.
+  Do not implement manually assigned tasks without permission.
