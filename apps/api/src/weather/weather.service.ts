@@ -1,18 +1,41 @@
 import { Injectable } from "@nestjs/common";
 import { OpenMeteoService } from "../open-meteo/open-meteo.service.js";
+import {
+  normalizeCurrent,
+  normalizeDaily,
+  normalizeHourly,
+  normalizeLocation,
+} from "./weather.helpers.js";
+import { weatherResponseSchema } from "@atmos/contracts";
 
 @Injectable()
 export class WeatherService {
   constructor(private readonly openMeteoService: OpenMeteoService) {}
-  getCities(query: string) {
-    return this.openMeteoService.getCities(query);
+  async getCities(query: string) {
+    const cities = await this.openMeteoService.getCities(query);
+
+    return { locations: cities.map(normalizeLocation) };
   }
 
-  getCityById(id: string) {
-    return this.openMeteoService.getCityById(id);
+  async getCityById(locationId: number) {
+    const city = await this.openMeteoService.getCityById(locationId);
+
+    return normalizeLocation(city);
   }
 
-  getForecast(latitude: number, longitude: number) {
-    return this.openMeteoService.getForecast(latitude, longitude);
+  async getWeather(locationId: number) {
+    const city = await this.openMeteoService.getCityById(locationId);
+
+    const forecast = await this.openMeteoService.getForecast(
+      city.latitude,
+      city.longitude,
+    );
+
+    return weatherResponseSchema.parse({
+      location: normalizeLocation(city),
+      current: normalizeCurrent(forecast.current),
+      hourly: normalizeHourly(forecast.hourly),
+      daily: normalizeDaily(forecast.daily),
+    });
   }
 }

@@ -43,6 +43,7 @@
 - `WAPI-BE-DEC-001`: Redis weather/geocoding caching, stale-if-error behavior, and manual refresh cooldown are deferred from the Weather API stage. The existing caching architecture and TTL decisions remain the target for a later OpenSpec change. Source: project owner clarification on 2026-10-27.
 - `WAPI-BE-DEC-002`: The owner implements core Open-Meteo provider integration, weather interpretation/normalization, and WeatherService behavior (or equivalents) as MANUAL work. All Weather API Backend tests, including tests for that core logic, belong to AI. Writing tests does not authorize AI to implement MANUAL core behavior. Source: project owner clarification on 2026-10-27.
 - The project owner approved the `weather-api` requirements and acceptance criteria, then the technical design and implementation plan, on 2026-10-27. The five non-blocking requirements questions were dispositioned in the approved `WAPI-TDEC-001`–`006` decisions. The plan has three MANUAL core-service tasks and nine AI tasks, including all Backend tests; task execution and verification remain outstanding.
+- On 2026-11-18 the project owner directly instructed archiving `weather-api` despite incomplete implementation and `ESCALATED` scoped verification. The change was synchronized to main specs before archiving; the archived task and verification statuses remain factual and do not claim PASS.
 
 ## Deferred / open decisions
 

@@ -1,7 +1,10 @@
 import { z } from "zod";
 
 // Open-Meteo geocoding ID as a positive decimal string; the stable selection reference.
-export const locationIdSchema = z.string().regex(/^[1-9]\d*$/);
+export const locationIdSchema = z.coerce
+    .number()
+    .int()
+    .positive();
 
 export const locationSchema = z.strictObject({
   id: locationIdSchema,

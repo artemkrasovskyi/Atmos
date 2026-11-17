@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from "@nestjs/common";
+import { Controller, Get, ParseIntPipe, Query } from "@nestjs/common";
 import { OpenMeteoService } from "./open-meteo.service.js";
 import { ForecastQuerySchema, type ForecastQueryDto } from "@atmos/contracts";
 
@@ -22,7 +22,7 @@ export class OpenMeteoController {
   }
 
   @Get("city")
-  getCityById(@Query("id") id: string) {
+  getCityById(@Query("id", ParseIntPipe) id: number) {
     return this.openMeteoService.getCityById(id);
   }
 }

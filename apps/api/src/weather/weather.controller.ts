@@ -1,19 +1,13 @@
-import { Controller, Get, Query } from "@nestjs/common";
+import { Controller, Get, ParseIntPipe, Query } from "@nestjs/common";
 import { WeatherService } from "./weather.service.js";
-import { ForecastQueryDto, ForecastQuerySchema } from "@atmos/contracts";
 
 @Controller("weather")
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
 
-  @Get("forecast")
-  getForecast(@Query() rawQuery: ForecastQueryDto) {
-    const query = ForecastQuerySchema.parse(rawQuery);
-
-    return this.weatherService.getForecast(
-      Number(query.latitude),
-      Number(query.longitude),
-    );
+  @Get("weather")
+  getWeather(@Query("id", ParseIntPipe) locationId: number) {
+    return this.weatherService.getWeather(locationId);
   }
 
   @Get("cities")
@@ -22,7 +16,7 @@ export class WeatherController {
   }
 
   @Get("city")
-  getCityById(@Query("id") id: string) {
+  getCityById(@Query("id") id: number) {
     return this.weatherService.getCityById(id);
   }
 }

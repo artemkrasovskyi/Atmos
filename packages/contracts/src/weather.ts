@@ -29,7 +29,6 @@ export const currentWeatherSchema = z.strictObject({
 export const hourlyWeatherSchema = z.strictObject({
   time: utcInstant,
   temperature: measurement,
-  apparentTemperature: measurement,
   weatherCode: measurement,
   humidity: measurement,
   windSpeed: measurement,
@@ -48,11 +47,9 @@ export const dailyWeatherSchema = z.strictObject({
 
 export const weatherResponseSchema = z.strictObject({
   location: locationSchema,
-  timeZone: z.string().min(1),
   current: currentWeatherSchema,
   hourly: z.array(hourlyWeatherSchema),
-  daily: z.array(dailyWeatherSchema).length(7),
-  units: weatherUnitsSchema,
+  daily: z.array(dailyWeatherSchema).length(7)
 });
 
 export const ForecastQuerySchema = z.strictObject({
