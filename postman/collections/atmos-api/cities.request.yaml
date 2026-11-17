@@ -1,0 +1,7 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/open-meteo/cities?q=Kyiv
+method: GET
+queryParams:
+  q: Kyiv
+order: 3000
